@@ -1,6 +1,4 @@
 # Blog
-欢迎提交 Issue 和 Pull Request！
-
 ---
 
 ## [一、Java八股文](Java_Interview_Questions.md)
@@ -13,5 +11,6 @@
 
 ![](pictures/公众号二维码.jpg)
 
+---
 ## License
 遵循 MIT 许可证。有关详细,请参阅 [LICENSE](LICENSE)。
