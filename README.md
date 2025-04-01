@@ -2,8 +2,9 @@
 ---
 
 ## [一、Java八股文](Java_Interview_Questions.md)
-## [二、力扣算法速通]()
-## [三、AI]()
+## 二、力扣算法速通
+### [2.1 《Hello 算法》1.2.0 PDF 电子书](https://www.hello-algo.com/chapter_hello_algo/)
+## 三、AI
 ###  [3.1、什么是AI?]()
 
 ---
