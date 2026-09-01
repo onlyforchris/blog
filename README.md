@@ -7,6 +7,9 @@
 
 ## 文章
 
+- [接一个"黑盒"系统：看不懂文档时的三招](https://onlyforchris.github.io/blog/blackbox-integration-three-moves/)
+- [让 AI 帮你写代码，又不失控：三条原则](https://onlyforchris.github.io/blog/ai-coding-without-losing-control/)
+- [写一个有用的复盘：别只讲过程，回答"防复发"的三问](https://onlyforchris.github.io/blog/write-useful-postmortem/)
 - [无网、麒麟 + ARM、自己家的大模型：一个"跑不起来很要命"的约束](https://onlyforchris.github.io/blog/deployment-constraints/)
 - [从"调一次大模型"到真 agent：判断一个 AI 项目真假的标准](https://onlyforchris.github.io/blog/tell-if-its-a-real-agent/)
 - [复盘一个多方集成的项目：槽点不少，但根子多半不在技术](https://onlyforchris.github.io/blog/retrospect-multiparty-integration/)

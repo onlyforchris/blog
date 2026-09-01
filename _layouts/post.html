@@ -74,6 +74,10 @@ layout: base
   [data-theme="dark"] .post-content th { background:#14161d; }
   [data-theme="dark"] .post-content th, [data-theme="dark"] .post-content td { border-color:#262b37; }
   [data-theme="dark"] footer.site-footer { border-color:#262b37; }
+  .post-content pre { position:relative; }
+  .copy-btn { position:absolute; top:.5rem; right:.55rem; font-size:.75rem; color:var(--muted); background:var(--surface); border:1px solid var(--line); border-radius:7px; padding:.2rem .55rem; cursor:pointer; transition:.15s; }
+  .copy-btn:hover { color:var(--accent); border-color:var(--accent); }
+  .copy-btn.ok { color:#2f9e44; border-color:#2f9e44; }
 </style>
 
 <div id="reading-bar"></div>
@@ -168,3 +172,29 @@ layout: base
   if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 })();
 </script>
+
+
+<script>
+(function () {
+  try {
+    document.querySelectorAll('.post-content pre').forEach(function (pre) {
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn'; btn.type = 'button'; btn.textContent = '复制';
+      btn.addEventListener('click', function () {
+        var code = pre.querySelector('code') || pre;
+        var text = (code.innerText || code.textContent || '').replace(/\n$/, '');
+        var done = function () { btn.textContent = '已复制'; btn.classList.add('ok'); setTimeout(function () { btn.textContent = '复制'; btn.classList.remove('ok'); }, 1400); };
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done).catch(function () { fallback(); }); } else { fallback(); }
+        function fallback() {
+          var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(ta); done();
+        }
+      });
+      pre.style.position = 'relative';
+      pre.appendChild(btn);
+    });
+  } catch (e) {}
+})();
+</script>
+{%- include footer.html -%}
