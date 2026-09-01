@@ -17,6 +17,11 @@
 ## 五、软考
 ### 5.1 [高级系统架构设计师](Senior_System_Architecture_Designer.md)
 
+## 六、近期文章
+### [6.1 为什么 200 OK 不等于事情做完了](posts/why-200-ok-is-not-done.md)
+### [6.2 一个中文任务名引发的跨平台故障](posts/chinese-task-name-transport-failure.md)
+### [6.3 自动化应该在哪一步停下来让人确认](posts/where-to-stop-and-ask-confirmation.md)
+
 
 ---
 ## 微信公众号
