@@ -3,62 +3,82 @@ layout: base
 ---
 <style>
   :root {
-    --accent: #818cf8;
-    --accent-2: #c084fc;
-    --accent-strong: #6366f1;
-    --ink: #1f2333;
-    --ink-soft: #575757;
-    --hero-from: #0b1020;
-    --hero-to: #1b1740;
-    --card-bg: rgba(255,255,255,0.06);
-    --card-border: rgba(255,255,255,0.12);
+    --accent: #818cf8; --accent-2: #c084fc;
+    --accent-strong: #6366f1; --ink: #1f2333; --ink-soft: #575757;
+    --hero-from: #070b1e; --hero-to: #140f38;
   }
   html { scroll-behavior: smooth; }
   body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--ink); }
   a { color: var(--accent-strong); }
 
-  /* Hero with interactive Three.js starfield + glow */
+  /* ---- Immersive hero ---- */
   .hero {
     position: relative; overflow: hidden;
+    min-height: 620px; height: 82vh;
+    background: var(--hero-from);
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* animated aurora gradient */
+  .hero::before {
+    content: ""; position: absolute; inset: -40%; z-index: 0;
     background:
-      radial-gradient(120% 90% at 78% 8%, rgba(192,132,252,.30), transparent 55%),
-      radial-gradient(110% 80% at 12% 90%, rgba(99,102,241,.28), transparent 60%),
+      radial-gradient(38% 42% at 20% 25%, rgba(99,102,241,.55), transparent 60%),
+      radial-gradient(40% 46% at 82% 30%, rgba(192,132,252,.5), transparent 62%),
+      radial-gradient(36% 40% at 60% 82%, rgba(56,189,248,.4), transparent 62%),
       linear-gradient(135deg, var(--hero-from), var(--hero-to));
-    color: #f8fafc;
-    padding: 5rem 0 4rem;
+    filter: blur(30px);
+    animation: aurora 16s ease-in-out infinite alternate;
   }
-  #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-  .hero .hero-inner { position: relative; z-index: 2; max-width: 60rem; margin: 0 auto; padding: 0 1.5rem; }
-  .hero h1 { margin: 0 0 .8rem; font-size: 2.9rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.05;
-    background: linear-gradient(90deg,#fff,#c7d2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero p.lead { margin: 0 0 .6rem; font-size: 1.18rem; color: #d3daf0; }
-  .hero p.sub { margin: 0 0 .6rem; font-size: .95rem; color: #9aa4c4; }
-  .hero .hero-meta { margin-top: 1.6rem; font-size: .85rem; color: #8b93b5; }
-  .hero .hero-meta a { color: #c7d2fe; text-decoration: none; margin-right: 1rem; }
-  .hero .hero-meta a:hover { text-decoration: underline; }
+  @keyframes aurora {
+    0%   { transform: translate3d(-4%, -2%, 0) rotate(0deg) scale(1); }
+    100% { transform: translate3d(4%, 3%, 0) rotate(8deg) scale(1.15); }
+  }
+  #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 1; }
+  /* subtle scanline + vignette for depth */
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(3,6,20,.55) 100%),
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: auto, 100% 3px;
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 48rem; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+  .hero-inner h1 {
+    margin: 0 0 .9rem; font-size: clamp(2.4rem, 7vw, 4.2rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.03;
+    background: linear-gradient(92deg,#fff 0%,#c7d2fe 40%,#f5d0fe 70%,#bae6fd 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(129,140,248,.35);
+  }
+  .hero-inner p.lead { margin: 0 0 .6rem auto; font-size: clamp(1.05rem,2.2vw,1.28rem); color: #e6e9f5; max-width: 34rem; }
+  .hero-inner p.sub { margin: 0 0 1.4rem auto; font-size: .95rem; color: #aab3d6; max-width: 32rem; }
+  .hero-inner .hero-meta { display: flex; gap: 1.4rem; justify-content: center; font-size: .9rem; }
+  .hero-inner .hero-meta a { color: #dbe2ff; text-decoration: none; padding: .5rem .5rem; border-bottom: 1px solid transparent; transition: .2s; }
+  .hero-inner .hero-meta a:hover { color: #fff; border-color: rgba(199,210,254,.6); }
+  .scroll-cue { position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%); z-index: 2; color: #8f9ac4; font-size: .8rem; letter-spacing: .2em; animation: bounce 1.8s infinite; }
+  @keyframes bounce { 0%,100%{transform:translate(-50%,0)} 50%{transform:translate(-50%,7px)} }
 
-  /* Glass article cards */
-  .content-wrap { max-width: 60rem; margin: 2.4rem auto 0; padding: 0 1.5rem; }
-  .post-list-heading {
-    font-size: 1.02rem; letter-spacing: .05em; color: var(--ink-soft);
-    text-transform: uppercase; margin-bottom: 1rem;
-  }
+  /* ---- glass article cards ---- */
+  .content-wrap { max-width: 60rem; margin: 2.6rem auto 0; padding: 0 1.5rem; }
+  .post-list-heading { font-size: 1.02rem; letter-spacing: .05em; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 1rem; }
   .post-list { padding-left: 0; }
   .post-list li {
-    list-style: none; margin-bottom: 1rem; padding: 1.1rem 1.3rem;
-    border-radius: 14px;
-    background: linear-gradient(180deg, rgba(129,140,248,.06), rgba(255,255,255,.02));
-    border: 1px solid rgba(99,102,241,.12);
+    list-style: none; margin-bottom: 1rem; padding: 1.2rem 1.4rem; border-radius: 16px;
+    background: linear-gradient(180deg, rgba(129,140,248,.07), rgba(255,255,255,.02));
+    border: 1px solid rgba(99,102,241,.14);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    position: relative; overflow: hidden;
   }
-  .post-list li:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -18px rgba(99,102,241,.5); border-color: rgba(99,102,241,.35); }
+  .post-list li::before { content:""; position:absolute; inset:0; background:linear-gradient(120deg,transparent,rgba(192,132,252,.5),transparent); transform:translateX(-100%); transition:transform .5s ease; }
+  .post-list li:hover::before { transform: translateX(100%); }
+  .post-list li:hover { transform: translateY(-3px); box-shadow: 0 18px 38px -18px rgba(99,102,241,.55); border-color: rgba(99,102,241,.4); }
   .post-list .post-meta { color: #828282; font-size: .82rem; margin-right: .5rem; }
-  .post-list h3 { margin: .35rem 0 .4rem; font-size: 1.22rem; }
-  .post-list .post-link { text-decoration: none; color: var(--ink); font-weight: 600; }
+  .post-list h3 { margin: .35rem 0 .4rem; font-size: 1.24rem; }
+  .post-list .post-link { text-decoration: none; color: var(--ink); font-weight: 700; }
   .post-list .post-link:hover { color: var(--accent-strong); }
   .post-tags { color: #9b9b9b; font-size: .78rem; }
   footer.site-footer { border-color: #ececf1; }
-  @media (max-width: 640px){ .hero h1{ font-size: 2.1rem; } }
+  @media (max-width: 720px){ .hero{ height: 78vh; min-height: 520px; } }
 </style>
 
 <div class="hero">
@@ -73,6 +93,7 @@ layout: base
       <a href="https://onlyforchris.github.io/blog/feed.xml">RSS</a>
     </p>
   </div>
+  <div class="scroll-cue">↓ SCROLL</div>
 </div>
 
 <div class="content-wrap">
@@ -93,47 +114,68 @@ layout: base
 (function () {
   var canvas = document.getElementById('hero-canvas');
   if (!canvas || typeof THREE === 'undefined') { return; }
+  var hero = canvas.parentElement;
   var scene = new THREE.Scene();
-  var cam = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-  cam.position.z = 4;
+  var cam = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  cam.position.z = 6;
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
   function resize() {
-    var w = canvas.clientWidth || 1, h = canvas.clientHeight || 1;
+    var w = hero.clientWidth || canvas.clientWidth || 1;
+    var h = hero.clientHeight || canvas.clientHeight || 1;
     cam.aspect = w / h; cam.updateProjectionMatrix();
     renderer.setSize(w, h, false);
   }
-  resize();
-  window.addEventListener('resize', resize);
+  resize(); window.addEventListener('resize', resize);
 
-  var N = 900, pos = [];
-  for (var i = 0; i < N; i++) {
-    pos.push((Math.random() - 0.5) * 12);
-    pos.push((Math.random() - 0.5) * 8);
-    pos.push((Math.random() - 0.5) * 8);
+  // Group that rotates with the mouse
+  var group = new THREE.Group(); scene.add(group);
+
+  // Lights
+  scene.add(new THREE.AmbientLight(0x304060, 0.7));
+  var p1 = new THREE.PointLight(0x818cf8, 1.6, 40); p1.position.set(4, 3, 5); scene.add(p1);
+  var p2 = new THREE.PointLight(0xc084fc, 1.3, 40); p2.position.set(-5, -2, 4); scene.add(p2);
+  var p3 = new THREE.PointLight(0x38bdf8, 0.9, 40); p3.position.set(0, -4, -3); scene.add(p3);
+
+  // Glowing torus knot (solid + wireframe overlay)
+  var knotGeo = new THREE.TorusKnotGeometry(1.15, 0.34, 200, 28);
+  var knot = new THREE.Mesh(knotGeo, new THREE.MeshStandardMaterial({ color: 0x6d6ff0, emissive: 0x2b2f77, metalness: 0.6, roughness: 0.28, flatShading: false }));
+  group.add(knot);
+  var wire = new THREE.Mesh(new THREE.TorusKnotGeometry(1.16, 0.35, 120, 16), new THREE.MeshBasicMaterial({ color: 0xc7d2fe, wireframe: true, transparent: true, opacity: 0.28 }));
+  group.add(wire);
+
+  // Orbiting small glowing spheres (sparkles)
+  var orbs = [];
+  for (var i = 0; i < 26; i++) {
+    var s = new THREE.Mesh(new THREE.SphereGeometry(0.03 + Math.random() * 0.05, 10, 10), new THREE.MeshBasicMaterial({ color: [0x93a4f5, 0xc084fc, 0x7dd3fc][i % 3], transparent: true, opacity: 0.85 }));
+    var r = 1.9 + Math.random() * 1.2, a = Math.random() * Math.PI * 2, b = Math.random() * Math.PI * 2;
+    s.position.set(Math.sin(a) * Math.cos(b) * r, Math.sin(b) * r, Math.cos(a) * Math.cos(b) * r);
+    group.add(s); orbs.push({ m: s, r: r, a: a, b: b, sp: 0.001 + Math.random() * 0.002 });
   }
-  var geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-  var mat = new THREE.PointsMaterial({ color: 0x93a4f5, size: 0.035, transparent: true, opacity: 0.9, sizeAttenuation: true });
-  var points = new THREE.Points(geo, mat);
-  scene.add(points);
 
-  // interactive parallax: sample star moves slightly with the mouse
-  var targetX = 0, targetY = 0, curX = 0, curY = 0;
-  window.addEventListener('mousemove', function (e) {
-    targetX = (e.clientX / window.innerWidth - 0.5) * 2;
-    targetY = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
+  // Distant particle field
+  var N = 700, pos = [];
+  for (var i = 0; i < N; i++) { pos.push((Math.random() - .5) * 16); pos.push((Math.random() - .5) * 10); pos.push((Math.random() - .5) * 10); }
+  var pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  var pMat = new THREE.PointsMaterial({ color: 0x93a4f5, size: 0.02, transparent: true, opacity: 0.8, sizeAttenuation: true });
+  var pts = new THREE.Points(pg, pMat); scene.add(pts);
+
+  // mouse target
+  var tx = 0, ty = 0, cx = 0, cy = 0;
+  window.addEventListener('mousemove', function (e) { tx = (e.clientX / window.innerWidth - .5) * 2; ty = (e.clientY / window.innerHeight - .5) * 2; });
 
   (function tick() {
     requestAnimationFrame(tick);
-    points.rotation.y += 0.0008;
-    points.rotation.x += 0.0004;
-    curX += (targetX - curX) * 0.02;
-    curY += (targetY - curY) * 0.02;
-    points.position.x = curX * 0.4;
-    points.position.y = -curY * 0.3;
+    // idle auto-rotate
+    knot.rotation.x += 0.0022; knot.rotation.y += 0.0035;
+    wire.rotation.x = knot.rotation.x; wire.rotation.y = knot.rotation.y;
+    // mouse-follow tilt
+    cx += (tx - cx) * 0.04; cy += (ty - cy) * 0.04;
+    group.rotation.y = cx * 0.5; group.rotation.x = -cy * 0.35;
+    // orbs drift
+    for (var i = 0; i < orbs.length; i++) { var o = orbs[i]; o.a += o.sp; o.m.position.set(Math.sin(o.a) * Math.cos(o.b) * o.r, Math.sin(o.b) * o.r, Math.cos(o.a) * Math.cos(o.b) * o.r); }
+    pts.rotation.y += 0.0004;
     renderer.render(scene, cam);
   })();
 })();
