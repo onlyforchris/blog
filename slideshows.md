@@ -27,7 +27,8 @@ title: 幻灯片
   </div>
   <div class="btns">
     <button class="ctl-btn solid" id="copyTpl">复制起点模板</button>
-    <a class="ctl-btn" href="{{ '/blog/write-html-slides/' | relative_url }}">查看教程</a>
+    <a class="ctl-btn" href="{{ '/write-html-slides/' | relative_url }}">查看教程</a>
+    <a class="ctl-btn" href="{{ '/apple-demo.html' | relative_url }}" target="_blank">Apple 风格演示 ↗</a>
   </div>
 </div>
 
