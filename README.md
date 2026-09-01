@@ -7,6 +7,9 @@
 
 ## 文章
 
+- [把"符合"拆成四档，而不是非黑即白](https://onlyforchris.github.io/blog/tiers-instead-of-binary/)
+- [中文技术标书的"五段式"，和"强承诺一定要补边界"](https://onlyforchris.github.io/blog/five-part-bid-and-boundaries/)
+- [一个本地控制面的边界：MCP 工具该暴露多细](https://onlyforchris.github.io/blog/local-control-plane-boundaries/)
 - [《为什么 200 OK 不等于事情做完了》](https://onlyforchris.github.io/blog/why-200-ok-is-not-done/)
 - [《一个中文任务名引发的跨平台故障》](https://onlyforchris.github.io/blog/chinese-task-name-transport-failure/)
 - [《自动化应该在哪一步停下来让人确认》](https://onlyforchris.github.io/blog/where-to-stop-and-ask-confirmation/)
