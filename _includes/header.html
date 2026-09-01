@@ -1,19 +1,52 @@
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="{{ '/' | relative_url }}">Chris · 博客</a>
-    <nav class="nav">
-      <a href="{{ '/' | relative_url }}">首页</a>
-      <a href="{{ '/about/' | relative_url }}">关于</a>
-      <a href="{{ '/tags/' | relative_url }}">标签</a>
-      <a href="{{ '/feed.xml' | relative_url }}">订阅</a>
-    </nav>
+    <div class="right">
+      <nav class="nav">
+        <a href="{{ '/' | relative_url }}">首页</a>
+        <a href="{{ '/about/' | relative_url }}">关于</a>
+        <a href="{{ '/tags/' | relative_url }}">标签</a>
+        <a href="{{ '/feed.xml' | relative_url }}">订阅</a>
+      </nav>
+      <button class="theme-toggle" aria-label="切换明暗主题">☾</button>
+    </div>
   </div>
 </header>
 <style>
   .site-header { position: sticky; top:0; z-index:50; backdrop-filter: blur(10px); background: rgba(246,246,244,.85); border-bottom:1px solid var(--line); }
   .header-inner { max-width:58rem; margin:0 auto; padding:.8rem 1.5rem; display:flex; align-items:center; justify-content:space-between; }
   .site-header .brand { font-weight:800; color:var(--ink); text-decoration:none; letter-spacing:-.01em; font-size:1.05rem; }
-  .site-header .nav a { color:var(--muted); text-decoration:none; font-size:.92rem; margin-left:1.4rem; transition:color .15s; }
+  .site-header .right { display:flex; align-items:center; gap:1.2rem; }
+  .site-header .nav { display:flex; gap:1.3rem; }
+  .site-header .nav a { color:var(--muted); text-decoration:none; font-size:.92rem; transition:color .15s; }
   .site-header .nav a:hover { color:var(--accent); }
-  @media (max-width:560px){ .header-inner{ padding:.7rem 1rem; } .site-header .nav a{ margin-left:1rem; } }
+  .theme-toggle { width:34px; height:34px; border-radius:50%; border:1px solid var(--line); background:var(--surface); color:var(--ink); font-size:1rem; cursor:pointer; line-height:1; transition:.15s; }
+  .theme-toggle:hover { border-color:var(--accent); color:var(--accent); }
+  @media (max-width:560px){ .header-inner{ padding:.7rem 1rem; } .site-header .nav a{ margin-left:.8rem; } }
+
+  /* dark-mode header overrides */
+  [data-theme="dark"] .site-header { background: rgba(13,14,20,.85); }
+  [data-theme="dark"] .theme-toggle { background: var(--surface); }
 </style>
+<script>
+(function () {
+  var root = document.documentElement;
+  var saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var theme = saved || (prefersDark ? 'dark' : 'light');
+  function apply(t) {
+    root.setAttribute('data-theme', t);
+    var b = document.querySelector('.theme-toggle');
+    if (b) b.textContent = (t === 'dark') ? '☀' : '☾';
+  }
+  apply(theme);
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('.theme-toggle');
+    if (!t) return;
+    var cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(cur);
+    try { localStorage.setItem('theme', cur); } catch (err) {}
+  });
+})();
+</script>

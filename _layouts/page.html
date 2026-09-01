@@ -6,7 +6,9 @@ layout: base
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#f6f6f4; --surface:#fff; --ink:#15151a; --muted:#6b6b72; --line:#ececec; --accent:#4f46e5; }
+  :root { --bg:#f6f6f4; --surface:#fff; --ink:#15151a; --muted:#6b6b72; --line:#ececec; --accent:#4f46e5; --accent-soft:#eef1ff; }
+  [data-theme="dark"] { --bg:#0e0f14; --surface:#16181f; --ink:#e8e9ef; --muted:#9aa1ad; --line:#262b37; --accent:#8b93f8; --accent-soft:#151a26; }
+  [data-theme="dark"] .page-content { color:#c9ced9; }
   * { box-sizing:border-box; }
   html { scroll-behavior:smooth; }
   body { background:var(--bg); color:var(--ink); font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; -webkit-font-smoothing:antialiased; letter-spacing:-0.01em; }
