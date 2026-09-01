@@ -2,6 +2,8 @@
 layout: post
 title: 为什么 200 OK 不等于事情做完了
 date: 2026-09-01
+section: 接口与可靠性
+featured: true
 tags: [接口, 故障, IM 接入, 可观测]
 ---
 

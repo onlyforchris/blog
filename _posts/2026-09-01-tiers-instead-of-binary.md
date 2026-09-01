@@ -2,6 +2,8 @@
 layout: post
 title: 把"符合"拆成四档，而不是非黑即白
 date: 2026-09-01
+section: 招聘与简历
+featured: true
 tags: [简历筛选, 岗位画像, 证据标准, 决策口径]
 ---
 

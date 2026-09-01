@@ -2,6 +2,7 @@
 layout: post
 title: SQLite 当控制面存储，够用但边界在哪
 date: 2026-09-01
+section: 控制面与存储
 tags: [SQLite, 控制面, 本地优先, 存储]
 ---
 

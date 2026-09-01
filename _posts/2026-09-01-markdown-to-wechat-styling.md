@@ -2,6 +2,7 @@
 layout: post
 title: Markdown 到公众号草稿，样式映射里最容易坏的一环
 date: 2026-09-01
+section: 文档自动化
 tags: [微信公众号, Markdown, 草稿, 样式映射]
 ---
 

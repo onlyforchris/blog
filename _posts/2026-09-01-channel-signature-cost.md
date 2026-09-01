@@ -2,6 +2,7 @@
 layout: post
 title: 渠道验签差异，是接入的隐性成本
 date: 2026-09-01
+section: 接口与可靠性
 tags: [安全, 验签, IM 接入, 适配器]
 ---
 

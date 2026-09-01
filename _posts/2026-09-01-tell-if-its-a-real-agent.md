@@ -2,6 +2,8 @@
 layout: post
 title: 从"调一次大模型"到真 agent：判断一个 AI 项目真假的标准
 date: 2026-09-01
+section: 工程判断
+featured: true
 tags: [agent, AI, 判断标准, 工程落地]
 ---
 

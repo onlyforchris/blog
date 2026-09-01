@@ -2,6 +2,7 @@
 layout: post
 title: 为什么把 cron 放在宿主进程里，而不是独立服务
 date: 2026-09-01
+section: 定时与调度
 tags: [定时任务, 架构取舍, 宿主进程, 可观测]
 ---
 

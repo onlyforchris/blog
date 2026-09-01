@@ -2,6 +2,7 @@
 layout: post
 title: 一个本地控制面的边界：MCP 工具该暴露多细
 date: 2026-09-01
+section: 控制面与存储
 tags: [MCP, 本地优先, 控制面, 边界]
 ---
 

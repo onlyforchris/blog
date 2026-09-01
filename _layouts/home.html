@@ -38,6 +38,8 @@ layout: base
 
   .content-wrap { max-width:50rem; margin:1.5rem auto 0; padding:0 1.5rem 4rem; }
   .section-label { font-size:.78rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:1.1rem; }
+  .group { margin-top: 2.4rem; }
+  .post-card .featured-tag { display:inline-block; font-size:.7rem; font-weight:600; letter-spacing:.06em; color:#fff; background:var(--accent); border-radius:99px; padding:.14rem .55rem; margin-left:.5rem; vertical-align:middle; }
   .post-list { padding-left:0; display:flex; flex-direction:column; gap:.9rem; }
   .post-list li { list-style:none; margin:0; }
   .post-card { display:block; position:relative; overflow:hidden; padding:1.4rem 1.6rem; border-radius:18px; background:var(--surface); border:1px solid var(--line);
@@ -72,22 +74,45 @@ layout: base
 </div>
 
 <div class="content-wrap">
-  <div class="section-label">文章</div>
+  <div class="section-label">推荐阅读</div>
   <ul class="post-list">
-    {% for post in site.posts %}
+    {% for post in site.posts %}{% if post.featured %}
     <li>
       <a class="post-card" href="{{ post.url | relative_url }}">
         <div class="top">
           <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
           <span class="min-read">{{ post.content | number_of_words | divided_by: 240 | plus: 1 }} min</span>
         </div>
-        <h3>{{ post.title }}</h3>
+        <h3>{{ post.title }}<span class="featured-tag">荐</span></h3>
         {% if post.excerpt %}<p class="excerpt">{{ post.excerpt | strip_html | truncate: 90 }}</p>{% endif %}
-        <div class="bottom">
-          {% if post.tags %}<span class="tags">{{ post.tags | join: ' · ' }}</span>{% endif %}
-        </div>
+        <div class="bottom">{% if post.tags %}<span class="tags">{{ post.tags | join: ' · ' }}</span>{% endif %}</div>
       </a>
     </li>
-    {% endfor %}
+    {% endif %}{% endfor %}
   </ul>
+
+  {% assign sections = "项目复盘|工程判断|接口与可靠性|定时与调度|控制面与存储|文档自动化|招聘与简历" | split: "|" %}
+  {% for sec in sections %}
+    {% assign sposts = site.posts | where: "section", sec %}
+    {% if sposts.size > 0 %}
+    <div class="group">
+      <div class="section-label">{{ sec }}</div>
+      <ul class="post-list">
+        {% for post in sposts %}{% unless post.featured %}
+        <li>
+          <a class="post-card" href="{{ post.url | relative_url }}">
+            <div class="top">
+              <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+              <span class="min-read">{{ post.content | number_of_words | divided_by: 240 | plus: 1 }} min</span>
+            </div>
+            <h3>{{ post.title }}</h3>
+            {% if post.excerpt %}<p class="excerpt">{{ post.excerpt | strip_html | truncate: 90 }}</p>{% endif %}
+            <div class="bottom">{% if post.tags %}<span class="tags">{{ post.tags | join: ' · ' }}</span>{% endif %}</div>
+          </a>
+        </li>
+        {% endunless %}{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  {% endfor %}
 </div>

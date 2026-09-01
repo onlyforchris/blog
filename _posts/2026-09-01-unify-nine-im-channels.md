@@ -2,6 +2,7 @@
 layout: post
 title: 9 个 IM 渠道，怎么收敛成一套接入接口
 date: 2026-09-01
+section: 接口与可靠性
 tags: [IM 接入, 适配器, 抽象, 渠道差异]
 ---
 

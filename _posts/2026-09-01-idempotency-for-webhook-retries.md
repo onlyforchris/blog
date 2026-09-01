@@ -2,6 +2,7 @@
 layout: post
 title: 幂等：IM webhook 重试时，怎么保证不重复处理
 date: 2026-09-01
+section: 接口与可靠性
 tags: [幂等, 消息处理, webhook, 可观测]
 ---
 
