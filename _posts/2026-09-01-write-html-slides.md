@@ -22,9 +22,9 @@ description: 一句话介绍这套演示（会显示在目录卡片上）
 <section class="slide"><div><h2>第二页</h2><p>内容...</p></div></section>
 ```
 
-存好 push 上去，访问这个页面就是一套可放映的演示。多个演示都放在 `_posts` 之外的普通页面里，会自动汇总到 **[幻灯片目录](/slideshows/)**。
+存好 push 上去，访问这个页面就是一套可放映的演示。多个演示都放在 `_posts` 之外的普通页面里，会自动汇总到 **[幻灯片目录]({{ '/slideshows/' | relative_url }})**。
 
-> 想要 **Apple 发布会风格**？在 frontmatter 加一句 `style: apple` 即可（黑底、大字号、渐变文字、特性卡片、光晕）。参考 [Apple 风格演示](/apple-deck/)。
+> 想要 **Apple 发布会风格**？在 frontmatter 加一句 `style: apple` 即可（黑底、大字号、渐变文字、特性卡片、光晕）。参考 [Apple 风格演示]({{ '/apple-deck/' | relative_url }})。
 
 ## 每页放什么
 
@@ -88,4 +88,4 @@ description: 一句话介绍这套演示（会显示在目录卡片上）
 - 标题别太长，屏幕大了缩、小了挤。
 - 想换配色/字号，`slide` 里加自己的 class，或在内容的 `<div>` 里内联样式都行。
 
-写多了自然就顺手了。想先在博客里看一套真的，去 **[幻灯片演示](/slideshow-demo/)** 转一圈。
+写多了自然就顺手了。想先在博客里看一套真的，去 **[幻灯片演示]({{ '/slideshow-demo/' | relative_url }})** 转一圈。
