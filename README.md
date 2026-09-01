@@ -7,6 +7,9 @@
 
 ## 文章
 
+- [幂等：IM webhook 重试时，怎么保证不重复处理](https://onlyforchris.github.io/blog/idempotency-for-webhook-retries/)
+- [SQLite 当控制面存储，够用但边界在哪](https://onlyforchris.github.io/blog/sqlite-for-control-plane/)
+- [渠道验签差异，是接入的隐性成本](https://onlyforchris.github.io/blog/channel-signature-cost/)
 - [9 个 IM 渠道，怎么收敛成一套接入接口](https://onlyforchris.github.io/blog/unify-nine-im-channels/)
 - [为什么把 cron 放在宿主进程里，而不是独立服务](https://onlyforchris.github.io/blog/cron-in-host-process/)
 - [Markdown 到公众号草稿，样式映射里最容易坏的一环](https://onlyforchris.github.io/blog/markdown-to-wechat-styling/)
@@ -16,6 +19,8 @@
 - [《为什么 200 OK 不等于事情做完了》](https://onlyforchris.github.io/blog/why-200-ok-is-not-done/)
 - [《一个中文任务名引发的跨平台故障》](https://onlyforchris.github.io/blog/chinese-task-name-transport-failure/)
 - [《自动化应该在哪一步停下来让人确认》](https://onlyforchris.github.io/blog/where-to-stop-and-ask-confirmation/)
+
+另有[关于页](https://onlyforchris.github.io/blog/about/)与[标签页](https://onlyforchris.github.io/blog/tags/)。
 
 ## 如何写文章
 

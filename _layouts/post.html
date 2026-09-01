@@ -53,6 +53,13 @@ layout: base
   .pagenav .t { font-size:1rem; font-weight:600; }
   .pagenav a.next { text-align:right; }
 
+  /* related */
+  .related { margin-top:2.6rem; }
+  .related .related-title { font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:.9rem; }
+  .related ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.5rem; }
+  .related li a { display:inline-block; color:var(--muted); font-size:1rem; }
+  .related li a:hover { color:var(--accent); }
+
   /* back to top */
   #top { position:fixed; right:1.4rem; bottom:1.6rem; width:44px; height:44px; border-radius:50%; background:var(--surface); border:1px solid var(--line); color:var(--muted); box-shadow:0 8px 20px -14px rgba(0,0,0,.35); cursor:pointer; opacity:0; pointer-events:none; transition:.2s; font-size:1.1rem; }
   #top.show { opacity:1; pointer-events:auto; }
@@ -71,6 +78,26 @@ layout: base
     </header>
     <div class="post-content" id="post-content">{{ content }}</div>
   </article>
+
+  {% if page.tags %}
+  {% assign shown = 0 %}
+  <aside class="related">
+    <div class="related-title">相关文章</div>
+    <ul>
+    {% for post in site.posts %}
+      {% if shown >= 4 %}{% break %}{% endif %}
+      {% unless post.url == page.url %}
+        {% assign share = false %}
+        {% for pt in post.tags %}{% for t in page.tags %}{% if pt == t %}{% assign share = true %}{% endif %}{% endfor %}{% endfor %}
+        {% if share %}
+          <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endunless %}
+    {% endfor %}
+    </ul>
+  </aside>
+  {% endif %}
 
   {% assign posts = site.posts %}
   {% for p in posts %}{% if p.url == page.url %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}

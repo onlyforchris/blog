@@ -1,0 +1,33 @@
+---
+layout: base
+---
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f6f6f4; --surface:#fff; --ink:#15151a; --muted:#6b6b72; --line:#ececec; --accent:#4f46e5; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; -webkit-font-smoothing:antialiased; letter-spacing:-0.01em; }
+  a { color:var(--accent); text-decoration:none; }
+  .wrap { max-width:44em; margin:0 auto; padding:3.4rem 1.5rem 4rem; }
+  .crumb { font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:2rem; }
+  .crumb a { color:var(--muted); } .crumb a:hover { color:var(--accent); }
+  .page-header { margin-bottom:2.2rem; }
+  .page-header h1 { font-size:clamp(1.9rem,5vw,2.6rem); font-weight:800; letter-spacing:-.02em; margin:0 0 .6rem; }
+  .page-content { font-size:1.05rem; line-height:1.85; color:#20212a; }
+  .page-content p { margin:0 0 1.1rem; }
+  .page-content a { color:var(--accent); }
+  .tag-list { display:flex; flex-direction:column; gap:1.6rem; }
+  .tag-group .tag-name { font-size:.9rem; font-weight:700; color:var(--accent); margin-bottom:.6rem; }
+  .tag-group ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.5rem; }
+  .tag-group li a { color:var(--ink); font-size:1rem; }
+  .tag-group li a:hover { color:var(--accent); }
+  footer.site-footer { border-color:var(--line); }
+</style>
+
+<div class="wrap">
+  <div class="crumb"><a href="{{ '/' | relative_url }}">← 返回</a></div>
+  <header class="page-header"><h1>{{ page.title }}</h1></header>
+  <div class="page-content">{{ content }}</div>
+</div>
