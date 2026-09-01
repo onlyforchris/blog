@@ -1,0 +1,30 @@
+---
+layout: base
+---
+<style>
+  .hero { padding: 2.4rem 0 1.1rem; border-bottom: 1px solid #eee; }
+  .hero h1 { margin: 0 0 .6rem; font-size: 2rem; }
+  .hero p.lead { margin: 0 0 .4rem; color: #575757; font-size: 1.05rem; }
+  .hero p.sub { margin: 0; color: #828282; font-size: .92rem; }
+  .post-list-heading { font-size: 1.1rem; letter-spacing: .02em; }
+  .post-list li { margin-bottom: 1rem; }
+  .post-tags { display: inline-block; margin-left: .6rem; color: #828282; font-size: .8rem; }
+  .site-footer { text-align: center; }
+</style>
+
+<div class="hero">
+  <h1>{{ site.title }}</h1>
+  <p class="lead">{{ site.description }}</p>
+  <p class="sub">只写真实工程问题与可复用的结论，不做工具清单和概念拼盘。</p>
+</div>
+
+<h2 class="post-list-heading">文章</h2>
+<ul class="post-list">
+  {% for post in site.posts %}
+  <li>
+    <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+    <h3 class="post-title"><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+    {% if post.tags %}<span class="post-tags">{{ post.tags | join: ' · ' }}</span>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
