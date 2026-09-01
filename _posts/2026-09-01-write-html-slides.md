@@ -24,6 +24,8 @@ description: 一句话介绍这套演示（会显示在目录卡片上）
 
 存好 push 上去，访问这个页面就是一套可放映的演示。多个演示都放在 `_posts` 之外的普通页面里，会自动汇总到 **[幻灯片目录](/slideshows/)**。
 
+> 想要 **Apple 发布会风格**？在 frontmatter 加一句 `style: apple` 即可（黑底、大字号、渐变文字、特性卡片、光晕）。参考 [Apple 风格演示](/apple-deck/)。
+
 ## 每页放什么
 
 一个 `<section class="slide">` 里，我会给你一个**居中的幻灯容器**，你往里写内容：

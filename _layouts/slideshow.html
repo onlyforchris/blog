@@ -59,9 +59,43 @@ layout: base
   .start-box .hint code { background:var(--accent-soft); padding:.1em .4em; border-radius:6px; }
 
   @media (max-width:560px){ .deck-top .deck-title{ display:none; } .deck-bottom .nav{ width:38px;height:38px; } }
+
+  /* ===== Apple Keynote style (opt-in via frontmatter `style: apple`) ===== */
+  .deck-wrap.apple { --bg:#000; --ink:#fff; --muted:rgba(255,255,255,.72); --line:rgba(255,255,255,.14); --accent:#0071e3; --surface:rgba(255,255,255,.06); }
+  .deck-wrap.apple .slide { background:#000; color:#fff; }
+  .deck-wrap.apple .slide.gradient { background:linear-gradient(135deg,#0a0a1a,#1a1a2e); }
+  .deck-wrap.apple .slide.grad-blue { background:linear-gradient(135deg,#05101f,#0a1a33); }
+  .deck-wrap.apple .slide.white { background:#fff; color:#1d1d1f; }
+  .deck-wrap.apple .slide.stats { background:#000; }
+  .deck-wrap.apple .headline-xl { font-size:clamp(2.6rem,7vw,5.4rem); font-weight:800; letter-spacing:-.04em; line-height:1.05; }
+  .deck-wrap.apple .headline { font-size:clamp(2rem,5.5vw,4rem); font-weight:700; letter-spacing:-.03em; }
+  .deck-wrap.apple .headline-sm { font-size:clamp(1.4rem,3.6vw,2.6rem); font-weight:700; letter-spacing:-.025em; }
+  .deck-wrap.apple .subheadline { font-size:clamp(1rem,2.2vw,1.5rem); font-weight:300; color:rgba(255,255,255,.7); }
+  .deck-wrap.apple .white .subheadline { color:#4b4b4f; }
+  .deck-wrap.apple .eyebrow { font-size:.9rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#0071e3; }
+  .deck-wrap.apple .stat-number { font-size:clamp(3rem,9vw,7rem); font-weight:800; letter-spacing:-.04em; }
+  .deck-wrap.apple .badge { display:inline-block; padding:.35rem .95rem; border:1px solid rgba(255,255,255,.28); border-radius:99px; font-size:.85rem; letter-spacing:.05em; }
+  .deck-wrap.apple .divider { height:1px; width:66px; background:rgba(255,255,255,.4); margin:1rem auto; }
+  .deck-wrap.apple .tagline { font-size:clamp(1.1rem,2.4vw,1.6rem); color:rgba(255,255,255,.85); }
+  .deck-wrap.apple .text-gradient-blue { background:linear-gradient(90deg,#4facfe,#00f2fe); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .deck-wrap.apple .text-gradient-purple { background:linear-gradient(90deg,#c471ed,#f64f59); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .deck-wrap.apple .text-gradient-gold { background:linear-gradient(90deg,#f7971e,#ffd200); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .deck-wrap.apple .text-gradient-green { background:linear-gradient(90deg,#43e97b,#38f9d7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .deck-wrap.apple .feature-card { max-width:20rem; padding:1.4rem; border-radius:22px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); }
+  .deck-wrap.apple .white .feature-card { background:rgba(0,0,0,.03); border-color:rgba(0,0,0,.08); }
+  .deck-wrap.apple .feature-icon { font-size:2rem; margin-bottom:.5rem; }
+  .deck-wrap.apple .feature-title { font-size:1.2rem; font-weight:700; margin-bottom:.4rem; }
+  .deck-wrap.apple .feature-desc { font-size:.95rem; color:rgba(255,255,255,.65); line-height:1.5; }
+  .deck-wrap.apple .white .feature-desc { color:#4b4b4f; }
+  .deck-wrap.apple .three-col { display:flex; gap:1.4rem; flex-wrap:wrap; justify-content:center; }
+  .deck-wrap.apple .slide > div { display:flex; flex-direction:column; align-items:center; gap:1.5rem; }
+  .deck-wrap.apple .bg-glow { position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; }
+  .deck-wrap.apple .bg-glow-blue { width:540px; height:540px; background:radial-gradient(circle,rgba(0,113,227,.25),transparent 60%); }
+  .deck-wrap.apple .bg-glow-teal { width:540px; height:540px; background:radial-gradient(circle,rgba(45,212,191,.22),transparent 60%); }
+  .deck-wrap.apple .bg-glow-purple { width:540px; height:540px; background:radial-gradient(circle,rgba(192,132,252,.22),transparent 60%); }
 </style>
 
-<div class="deck-wrap">
+<div class="deck-wrap{% if page.style == 'apple' %} apple{% endif %}">
   <div class="deck-top">
     <a class="back" href="{{ '/' | relative_url }}">← 返回</a>
     <span class="deck-title">{{ page.title }}</span>
