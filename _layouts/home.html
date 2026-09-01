@@ -39,6 +39,7 @@ layout: base
   .content-wrap { max-width:50rem; margin:1.5rem auto 0; padding:0 1.5rem 4rem; }
   .section-label { font-size:.78rem; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:1.1rem; }
   .group { margin-top: 2.4rem; }
+  .section-desc { font-size:.9rem; color:var(--muted); margin:-.5rem 0 1.1rem; }
   .post-card .featured-tag { display:inline-block; font-size:.7rem; font-weight:600; letter-spacing:.06em; color:#fff; background:var(--accent); border-radius:99px; padding:.14rem .55rem; margin-left:.5rem; vertical-align:middle; }
   .post-list { padding-left:0; display:flex; flex-direction:column; gap:.9rem; }
   .post-list li { list-style:none; margin:0; }
@@ -91,12 +92,21 @@ layout: base
     {% endif %}{% endfor %}
   </ul>
 
-  {% assign sections = "项目复盘|工程判断|接口与可靠性|定时与调度|控制面与存储|文档自动化|招聘与简历" | split: "|" %}
+  {% assign sections = "项目复盘|工程判断|接口与可靠性|定时与调度|控制面与存储|部署与交付|文档自动化|招聘与简历" | split: "|" %}
   {% for sec in sections %}
     {% assign sposts = site.posts | where: "section", sec %}
     {% if sposts.size > 0 %}
     <div class="group">
       <div class="section-label">{{ sec }}</div>
+      {% if sec == "项目复盘" %}<p class="section-desc">真实项目的复盘与避雷。</p>
+      {% elsif sec == "工程判断" %}<p class="section-desc">一些值得讲清楚的工程判断。</p>
+      {% elsif sec == "接口与可靠性" %}<p class="section-desc">接口、幂等、验签与可观测。</p>
+      {% elsif sec == "定时与调度" %}<p class="section-desc">定时任务与调度的取舍。</p>
+      {% elsif sec == "控制面与存储" %}<p class="section-desc">本地控制面与存储边界。</p>
+      {% elsif sec == "部署与交付" %}<p class="section-desc">部署约束与落地交付。</p>
+      {% elsif sec == "文档自动化" %}<p class="section-desc">内容生产与文档自动化。</p>
+      {% elsif sec == "招聘与简历" %}<p class="section-desc">招聘与简历筛选工程。</p>
+      {% endif %}
       <ul class="post-list">
         {% for post in sposts %}{% unless post.featured %}
         <li>
