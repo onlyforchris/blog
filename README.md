@@ -7,6 +7,9 @@
 
 ## 文章
 
+- [9 个 IM 渠道，怎么收敛成一套接入接口](https://onlyforchris.github.io/blog/unify-nine-im-channels/)
+- [为什么把 cron 放在宿主进程里，而不是独立服务](https://onlyforchris.github.io/blog/cron-in-host-process/)
+- [Markdown 到公众号草稿，样式映射里最容易坏的一环](https://onlyforchris.github.io/blog/markdown-to-wechat-styling/)
 - [把"符合"拆成四档，而不是非黑即白](https://onlyforchris.github.io/blog/tiers-instead-of-binary/)
 - [中文技术标书的"五段式"，和"强承诺一定要补边界"](https://onlyforchris.github.io/blog/five-part-bid-and-boundaries/)
 - [一个本地控制面的边界：MCP 工具该暴露多细](https://onlyforchris.github.io/blog/local-control-plane-boundaries/)
