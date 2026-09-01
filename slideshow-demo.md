@@ -42,6 +42,7 @@ title: 我的演示
       <li><code>→</code>/<code>空格</code>/<code>回车</code> 下一页</li>
       <li><code>←</code>/<code>PageUp</code> 上一页</li>
       <li><code>F</code> 全屏 · <code>T</code> 明暗切换 · <code>Home</code>/<code>End</code> 跳头尾</li>
+      <li>右上角 <code>☰</code> / <code>M</code> 打开目录，点任意标题直接跳到那一页</li>
       <li>右下角 ↦ / 点击右半边翻页，底部进度条 + 页码</li>
     </ul>
   </div>

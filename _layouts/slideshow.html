@@ -20,6 +20,13 @@ layout: base
   .deck-tools button, .deck-bottom .play { width:34px; height:34px; border-radius:50%; border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer; font-size:1rem; transition:.15s; }
   .deck-tools button:hover, .deck-bottom .play:hover { border-color:var(--accent); color:var(--accent); }
 
+  /* slide menu */
+  .slide-menu { position:absolute; top:60px; right:1.2rem; z-index:40; min-width:240px; max-height:60vh; overflow:auto; background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 34px -22px rgba(0,0,0,.45); padding:.4rem; opacity:0; transform:translateY(-6px); pointer-events:none; transition:.18s; }
+  .slide-menu.open { opacity:1; transform:translateY(0); pointer-events:auto; }
+  .slide-menu .smenu-title { font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); padding:.5rem .7rem .3rem; }
+  .slide-menu button { display:block; width:100%; text-align:left; background:none; border:none; color:var(--ink); padding:.5rem .7rem; border-radius:9px; font-size:.92rem; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .slide-menu button:hover { background:var(--accent-soft); color:var(--accent); }
+
   .deck { position:relative; flex:1; overflow:hidden; }
   .slide { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:clamp(2rem,6vw,5rem); text-align:center; opacity:0; pointer-events:none; transition:opacity .3s ease; }
   .slide.active { opacity:1; pointer-events:auto; }
@@ -58,10 +65,12 @@ layout: base
     <a class="back" href="{{ '/' | relative_url }}">← 返回</a>
     <span class="deck-title">{{ page.title }}</span>
     <div class="deck-tools">
+      <button data-act="menu" aria-label="目录">☰</button>
       <button data-act="theme" aria-label="切换主题">☾</button>
       <button data-act="full" aria-label="全屏">⛶</button>
     </div>
   </div>
+  <div class="slide-menu" id="slideMenu"><div class="smenu-title">目录</div></div>
   <div class="deck" id="deck">{{ content }}</div>
   <div class="deck-bottom">
     <button class="play" data-act="play" aria-label="自动播放">▶</button>
@@ -135,6 +144,20 @@ layout: base
     applyTheme(cur); try { localStorage.setItem('theme', cur); } catch (e) {}
   });
 
+  // slide menu: jump to any slide
+  var menu = document.getElementById('slideMenu'), menuBtn = document.querySelector('[data-act="menu"]');
+  if (menu) {
+    slides.forEach(function (s, i) {
+      var h = s.querySelector('h1,h2,h3');
+      var label = h ? h.textContent.trim() : ('第 ' + (i + 1) + ' 页');
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = label;
+      b.addEventListener('click', function (e) { e.stopPropagation(); show(i); resetTimer(); menu.classList.remove('open'); });
+      menu.appendChild(b);
+    });
+    if (menuBtn) menuBtn.addEventListener('click', function (e) { e.stopPropagation(); menu.classList.toggle('open'); });
+    document.addEventListener('click', function (e) { if (!menu.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) menu.classList.remove('open'); });
+  }
+
   if (start) start.addEventListener('click', begin);
 
   document.addEventListener('keydown', function (e) {
@@ -145,6 +168,7 @@ layout: base
     else if (e.key === 'End') { show(slides.length - 1); resetTimer(); }
     else if (e.key === 'f' || e.key === 'F') { document.querySelector('[data-act="full"]').click(); }
     else if (e.key === 't' || e.key === 'T') { document.querySelector('[data-act="theme"]').click(); }
+    else if (e.key === 'm' || e.key === 'M') { if (menu) menu.classList.toggle('open'); }
   });
 
   if (deck) deck.addEventListener('click', function (e) {
