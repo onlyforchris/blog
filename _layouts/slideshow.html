@@ -26,6 +26,7 @@ layout: base
   .slide-menu .smenu-title { font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); padding:.5rem .7rem .3rem; }
   .slide-menu button { display:block; width:100%; text-align:left; background:none; border:none; color:var(--ink); padding:.5rem .7rem; border-radius:9px; font-size:.92rem; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .slide-menu button:hover { background:var(--accent-soft); color:var(--accent); }
+  .slide-menu button.active { color:var(--accent); background:var(--accent-soft); font-weight:600; }
 
   .deck { position:relative; flex:1; overflow:hidden; }
   .slide { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:clamp(2rem,6vw,5rem); text-align:center; opacity:0; pointer-events:none; transition:opacity .3s ease; }
@@ -97,6 +98,7 @@ layout: base
   var bar = document.querySelector('.progress .bar'), start = document.getElementById('start');
   var playBtn = document.querySelector('[data-act="play"]');
   var idx = 0, started = false, playing = false, timer = null;
+  var menuBtns = [];
 
   function applyTheme(t) {
     root.setAttribute('data-theme', t);
@@ -110,6 +112,7 @@ layout: base
     if (!slides.length) return;
     idx = Math.max(0, Math.min(i, slides.length - 1));
     slides.forEach(function (s, k) { s.classList.toggle('active', k === idx); });
+    menuBtns.forEach(function (b, k) { if (b) b.classList.toggle('active', k === idx); });
     if (totalEl) totalEl.textContent = slides.length;
     if (counter) counter.firstChild.textContent = (idx + 1) + " / ";
     if (bar) bar.style.width = ((idx + 1) / slides.length * 100) + '%';
@@ -152,6 +155,7 @@ layout: base
       var label = h ? h.textContent.trim() : ('第 ' + (i + 1) + ' 页');
       var b = document.createElement('button'); b.type = 'button'; b.textContent = label;
       b.addEventListener('click', function (e) { e.stopPropagation(); show(i); resetTimer(); menu.classList.remove('open'); });
+      menuBtns[i] = b;
       menu.appendChild(b);
     });
     if (menuBtn) menuBtn.addEventListener('click', function (e) { e.stopPropagation(); menu.classList.toggle('open'); });

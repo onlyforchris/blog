@@ -7,6 +7,7 @@
 
 ## 文章
 
+- [用 HTML 写一套能放映的幻灯片：从这里开始](https://onlyforchris.github.io/blog/write-html-slides/)
 - [接一个"黑盒"系统：看不懂文档时的三招](https://onlyforchris.github.io/blog/blackbox-integration-three-moves/)
 - [让 AI 帮你写代码，又不失控：三条原则](https://onlyforchris.github.io/blog/ai-coding-without-losing-control/)
 - [写一个有用的复盘：别只讲过程，回答"防复发"的三问](https://onlyforchris.github.io/blog/write-useful-postmortem/)

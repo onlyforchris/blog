@@ -1,6 +1,7 @@
 ---
 layout: slideshow
 title: 幻灯片演示
+description: 一个演示——放映、目录、自动播放、全屏怎么用
 ---
 
 <section class="slide">
