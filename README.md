@@ -7,6 +7,7 @@
 
 ## 文章
 
+- [复盘一个多方集成的项目：槽点不少，但根子多半不在技术](https://onlyforchris.github.io/blog/retrospect-multiparty-integration/)
 - [幂等：IM webhook 重试时，怎么保证不重复处理](https://onlyforchris.github.io/blog/idempotency-for-webhook-retries/)
 - [SQLite 当控制面存储，够用但边界在哪](https://onlyforchris.github.io/blog/sqlite-for-control-plane/)
 - [渠道验签差异，是接入的隐性成本](https://onlyforchris.github.io/blog/channel-signature-cost/)
