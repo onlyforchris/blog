@@ -2,29 +2,124 @@
 layout: base
 ---
 <style>
-  .hero { padding: 2.4rem 0 1.1rem; border-bottom: 1px solid #eee; }
-  .hero h1 { margin: 0 0 .6rem; font-size: 2rem; }
-  .hero p.lead { margin: 0 0 .4rem; color: #575757; font-size: 1.05rem; }
-  .hero p.sub { margin: 0; color: #828282; font-size: .92rem; }
-  .post-list-heading { font-size: 1.1rem; letter-spacing: .02em; }
-  .post-list li { margin-bottom: 1rem; }
-  .post-tags { display: inline-block; margin-left: .6rem; color: #828282; font-size: .8rem; }
-  .site-footer { text-align: center; }
+  :root {
+    --accent: #818cf8;
+    --accent-strong: #6366f1;
+    --ink: #1f2333;
+    --ink-soft: #575757;
+    --hero-from: #0f172a;
+    --hero-to: #1e1b4b;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--ink); }
+  a { color: var(--accent-strong); }
+
+  /* Hero with Three.js starfield */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--hero-from), var(--hero-to));
+    color: #f8fafc;
+    padding: 4.2rem 0 3.4rem;
+    text-align: left;
+  }
+  #hero-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .hero .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 60rem; margin: 0 auto; padding: 0 1rem;
+  }
+  .hero h1 { margin: 0 0 .7rem; font-size: 2.6rem; font-weight: 700; letter-spacing: -.01em; }
+  .hero p.lead { margin: 0 0 .5rem; font-size: 1.12rem; color: #cdd5ec; }
+  .hero p.sub { margin: 0 0 .4rem; font-size: .95rem; color: #9aa4c4; }
+  .hero .hero-meta { margin-top: 1.4rem; font-size: .85rem; color: #8b93b5; }
+  .hero .hero-meta a { color: #c7d2fe; text-decoration: none; }
+  .hero .hero-meta a:hover { text-decoration: underline; }
+
+  /* Content */
+  .content-wrap { max-width: 60rem; margin: 2rem auto 0; padding: 0 1rem; }
+  .post-list-heading {
+    font-size: 1.05rem; letter-spacing: .04em;
+    color: var(--ink-soft); text-transform: uppercase;
+    border-bottom: 1px solid #ececf1; padding-bottom: .6rem; margin-bottom: 1.2rem;
+  }
+  .post-list li { margin-bottom: 1.3rem; list-style: none; }
+  .post-list { padding-left: 0; }
+  .post-list .post-meta { color: #828282; font-size: .82rem; margin-right: .5rem; }
+  .post-list h3 { margin: .2rem 0 .3rem; font-size: 1.2rem; }
+  .post-list .post-link { text-decoration: none; }
+  .post-list .post-link:hover { color: var(--accent-strong); }
+  .post-tags { color: #828282; font-size: .78rem; }
+
+  footer.site-footer { border-color: #ececf1; }
 </style>
 
 <div class="hero">
-  <h1>{{ site.title }}</h1>
-  <p class="lead">{{ site.description }}</p>
-  <p class="sub">只写真实工程问题与可复用的结论，不做工具清单和概念拼盘。</p>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <h1>{{ site.title }}</h1>
+    <p class="lead">{{ site.description }}</p>
+    <p class="sub">只写真实工程问题与可复用的结论，不做工具清单和概念拼盘。</p>
+    <p class="hero-meta">
+      <a href="https://github.com/onlyforchris">GitHub</a> ·
+      <a href="https://github.com/onlyforchris/blog">仓库源码</a> ·
+      <a href="https://onlyforchris.github.io/blog/feed.xml">RSS</a>
+    </p>
+  </div>
 </div>
 
-<h2 class="post-list-heading">文章</h2>
-<ul class="post-list">
-  {% for post in site.posts %}
-  <li>
-    <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
-    <h3 class="post-title"><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-    {% if post.tags %}<span class="post-tags">{{ post.tags | join: ' · ' }}</span>{% endif %}
-  </li>
-  {% endfor %}
-</ul>
+<div class="content-wrap">
+  <h2 class="post-list-heading">文章</h2>
+  <ul class="post-list">
+    {% for post in site.posts %}
+    <li>
+      <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+      <h3><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      {% if post.tags %}<span class="post-tags">{{ post.tags | join: ' · ' }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas || typeof THREE === 'undefined') { return; }
+  var scene = new THREE.Scene();
+  var cam = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  cam.position.z = 4;
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  function resize() {
+    var w = canvas.clientWidth || 1, h = canvas.clientHeight || 1;
+    cam.aspect = w / h; cam.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var N = 850, pos = [];
+  for (var i = 0; i < N; i++) {
+    pos.push((Math.random() - 0.5) * 12);
+    pos.push((Math.random() - 0.5) * 8);
+    pos.push((Math.random() - 0.5) * 8);
+  }
+  var geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  var mat = new THREE.PointsMaterial({ color: 0x93a4f5, size: 0.03, transparent: true, opacity: 0.85, sizeAttenuation: true });
+  var points = new THREE.Points(geo, mat);
+  scene.add(points);
+
+  (function tick() {
+    requestAnimationFrame(tick);
+    points.rotation.y += 0.0008;
+    points.rotation.x += 0.0004;
+    renderer.render(scene, cam);
+  })();
+})();
+</script>
