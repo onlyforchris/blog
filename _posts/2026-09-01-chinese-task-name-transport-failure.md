@@ -1,4 +1,5 @@
 ---
+layout: post
 title: 一个中文任务名引发的跨平台故障
 date: 2026-09-01
 tags: [编码, 定时任务, Agent, 回归测试]

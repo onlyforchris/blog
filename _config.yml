@@ -1,0 +1,29 @@
+# Jekyll configuration for GitHub Pages (project site at /blog/)
+title: Chris 的博客
+description: 真实工程问题与技术笔记。不做工具清单和概念拼盘。
+baseurl: "/blog"
+url: "https://onlyforchris.github.io"
+theme: minima
+permalink: /:title/
+
+author:
+  name: Chris
+  url: "https://github.com/onlyforchris"
+
+# Exclude the large reference/materials files so they don't bloat the site
+exclude:
+  - docs
+  - posts
+  - .idea
+  - Java_Interview_Questions.md
+  - Python_Quick_Start.md
+  - Senior_System_Architecture_Designer.md
+  - pictures
+  - Gemfile.lock
+  - .gitignore
+
+keep_files:
+  - assets
+
+plugins:
+  - jekyll-feed

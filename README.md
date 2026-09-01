@@ -1,40 +1,36 @@
-# 个人博客
+# Chris 的博客
 
-> 沉淀 Java、算法、软考等原创学习资料与整理的电子书，欢迎交流。
+真实工程问题与技术笔记。不做工具清单和概念拼盘。
 
-本仓库是 `onlyforchris` 的个人博客 / 资料库，以原创学习笔记与整理的电子书为主，内容会持续补充。
+> 本仓库是 `onlyforchris` 的 GitHub Pages **博客站源码**（Jekyll），托管在
+> **[https://onlyforchris.github.io/blog/](https://onlyforchris.github.io/blog/)**。
 
-## 内容索引
+## 文章
 
-### Java
+- [《为什么 200 OK 不等于事情做完了》](https://onlyforchris.github.io/blog/why-200-ok-is-not-done/)
+- [《一个中文任务名引发的跨平台故障》](https://onlyforchris.github.io/blog/chinese-task-name-transport-failure/)
+- [《自动化应该在哪一步停下来让人确认》](https://onlyforchris.github.io/blog/where-to-stop-and-ask-confirmation/)
 
-- [Java 八股文](Java_Interview_Questions.md) —— 面试高频知识点整理，含掘金文章链接列表与完整正文。
+## 如何写文章
 
-### 近期文章
+1. 在 [`_posts/`](_posts) 新建 `YYYY-MM-DD-简短标题.md`，采用 frontmatter：
 
-- [为什么 200 OK 不等于事情做完了](posts/why-200-ok-is-not-done.md)
-- [一个中文任务名引发的跨平台故障](posts/chinese-task-name-transport-failure.md)
-- [自动化应该在哪一步停下来让人确认](posts/where-to-stop-and-ask-confirmation.md)
+   ```yaml
+   ---
+   layout: post
+   title: 文章标题
+   date: 2026-09-01
+   tags: [主标签]
+   ---
+   ```
 
-> 文章目录与写作约定见 [posts/README.md](posts/README.md)。
+2. 正文以 `# 标题` 开头，用 `##` / `###` 分节，写完 push 到 `main`，GitHub Pages 会自动构建。
 
-### 算法
+## 资料存档
 
-- [《Hello 算法》1.2.0 中文 Java 版电子书](docs/hello-algo_1.2.0_zh_java.pdf) —— 在线版见 <https://www.hello-algo.com/chapter_hello_algo/>。
-
-### Python
-
-- [Python 从入门到入土](Python_Quick_Start.md) —— 整理中（当前文件为空，待补充）。
-
-### 软考
-
-- [高级系统架构设计师](Senior_System_Architecture_Designer.md) —— 备考笔记，官方报名 / 考试官网：<https://www.ruankao.org.cn/index.html>。
-
-> 说明：原 README 的「AI」章节暂无可公开内容，故未列出。
-
-## 微信公众号
-
-![](pictures/公众号二维码.jpg)
+原先放在本仓库的 Java / 算法 / Python / 软考等**学习资料**已迁移到
+[`onlyforchris/notes`](https://github.com/onlyforchris/notes)（`docs`、`pictures` 等也一并迁走），
+本仓库只保留博客文章。
 
 ## 许可
 
